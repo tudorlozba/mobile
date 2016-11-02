@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android2="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_add_new_contact"
+        android:title="Add new"
+        android:icon="@drawable/ic_add_contact"
+        android2:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/menu_dummy_contacts"
+        android:title="Add dummy conacts"/>
+</menu>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "369974194388",
+    "firebase_url": "https://phoneagenda-d21e4.firebaseio.com",
+    "project_id": "phoneagenda-d21e4",
+    "storage_bucket": "phoneagenda-d21e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369974194388:android:4bff871f6da5b8a2",
+        "android_client_info": {
+          "package_name": "com.android.phoneagenda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369974194388-c88k27isuov53oamdeqvsr1a7kaf7edm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.phoneagenda",
+            "certificate_hash": "01EC5294EEAC94561F6E2DD07425526DE10D4349"
+          }
+        },
+        {
+          "client_id": "369974194388-9f8oaodbhn08cb6vi92hvi8b3vdru4j6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTRkR267x6xNLesILuXx5qyFUwrYzinRM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369974194388-9f8oaodbhn08cb6vi92hvi8b3vdru4j6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
