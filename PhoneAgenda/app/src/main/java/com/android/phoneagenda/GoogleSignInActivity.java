@@ -1,17 +1,13 @@
 package com.android.phoneagenda;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -27,6 +23,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class GoogleSignInActivity extends BaseActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -52,7 +50,7 @@ public class GoogleSignInActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
@@ -99,7 +97,7 @@ public class GoogleSignInActivity extends BaseActivity implements
             }
         };
         // [END auth_state_listener]
-    }
+            }
 
     // [START on_start_add_listener]
     @Override
@@ -181,6 +179,10 @@ public class GoogleSignInActivity extends BaseActivity implements
 
     private void startApp() {
         hideProgressDialog();
+
+        DatabaseReference scoresRef = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
+        scoresRef.keepSynced(true);
+
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), MainActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
