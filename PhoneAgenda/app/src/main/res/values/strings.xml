@@ -8,4 +8,6 @@
     <string name="email">Email</string>
     <string name="save_contact">Save contact</string>
     <string name="addContact">Add new contact</string>
+    <string name="editContact">Edit contact</string>
+    <string name="update_contact">Update contact</string>
 </resources>

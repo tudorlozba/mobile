@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class ViewContactsFragment extends Fragment implements DatabaseHelper.DatabaseListener{
 
     private ArrayList<Contact> contacts = new ArrayList<>();
+    private ArrayList<String> keys = new ArrayList<>();
     private ListView list;
     private ContactsListAdapter adapter;
 
@@ -23,7 +24,7 @@ public class ViewContactsFragment extends Fragment implements DatabaseHelper.Dat
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_view_contacts_layout,null);
-        adapter = new ContactsListAdapter(getContext(), contacts);
+        adapter = new ContactsListAdapter(getContext(), contacts, (ContactsListAdapter.ListItemClickListener) getActivity());
         list = (ListView) v.findViewById(R.id.contacts_list);
         list.setAdapter(adapter);
 
@@ -33,6 +34,7 @@ public class ViewContactsFragment extends Fragment implements DatabaseHelper.Dat
     @Override
     public void onResume() {
         super.onResume();
+        ((BaseActivity)getActivity()).showProgressDialog();
         DatabaseHelper.fetchContacts(this);
     }
 
@@ -41,12 +43,14 @@ public class ViewContactsFragment extends Fragment implements DatabaseHelper.Dat
         this.contacts.clear();
         this.contacts.addAll(contacts);
         adapter.notifyDataSetChanged();
+        ((BaseActivity)getActivity()).hideProgressDialog();
     }
 
     @Override
     public void onFail() {
 
     }
+
 
     public void createDummyContacts(){
         for(int i=0; i<10; i++){

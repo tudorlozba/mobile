@@ -180,6 +180,7 @@ public class GoogleSignInActivity extends BaseActivity implements
     }
 
     private void startApp() {
+        hideProgressDialog();
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), MainActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

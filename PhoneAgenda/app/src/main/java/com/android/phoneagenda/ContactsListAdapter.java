@@ -17,10 +17,12 @@ public class ContactsListAdapter extends BaseAdapter {
 
     private final ArrayList<Contact> contacts;
     private final Context mContext;
+    private final ListItemClickListener mListener;
 
-    public ContactsListAdapter(Context context, ArrayList<Contact> contacts){
+    public ContactsListAdapter(Context context, ArrayList<Contact> contacts, ListItemClickListener listener){
         this.contacts = contacts;
         this.mContext = context;
+        this.mListener = listener;
     }
     @Override
     public int getCount() {
@@ -34,7 +36,7 @@ public class ContactsListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return contacts.get(position).getId();
+        return position;
     }
 
     @Override
@@ -50,10 +52,16 @@ public class ContactsListAdapter extends BaseAdapter {
             mViewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        Contact currentListData = getItem(position);
+        final Contact currentListData = getItem(position);
 
         mViewHolder.tv_name.setText(currentListData.getName());
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onListItemClicked(currentListData);
+            }
+        });
         return convertView;
     }
 
@@ -63,5 +71,9 @@ public class ContactsListAdapter extends BaseAdapter {
         public MyViewHolder(View item) {
             tv_name = (TextView) item.findViewById(R.id.tvTitle);
         }
+    }
+
+    public interface ListItemClickListener{
+        void onListItemClicked(Contact c);
     }
 }
