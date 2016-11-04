@@ -1,19 +1,8 @@
 package com.android.phoneagenda;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
-
+import android.support.v4.app.FragmentManager;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends BaseActivity implements ContactsListAdapter.ListItemClickListener{
 
@@ -26,7 +15,6 @@ public class MainActivity extends BaseActivity implements ContactsListAdapter.Li
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         mViewContacts = new ViewContactsFragment();
-        AddContactFragment mAddContact = new AddContactFragment();
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.main_container, mViewContacts).commit();
@@ -35,27 +23,9 @@ public class MainActivity extends BaseActivity implements ContactsListAdapter.Li
     @Override
     protected void onResume() {
         super.onResume();
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menu_dummy_contacts){
-            mViewContacts.createDummyContacts();
-            DatabaseHelper.fetchContacts(mViewContacts);
-            return true;
-        } else if(item.getItemId() == R.id.menu_add_new_contact){
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AddContactFragment(), ADD_CONTACT_FRAGMENT_TAG).commit();
-            setTitle(getString(R.string.addContact));
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed() {
@@ -75,7 +45,7 @@ public class MainActivity extends BaseActivity implements ContactsListAdapter.Li
         args.putString(CONTACT_ARG_KEY, json);
         AddContactFragment mAddContact = new AddContactFragment();
         mAddContact.setArguments(args);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, mAddContact).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, mAddContact, ADD_CONTACT_FRAGMENT_TAG).commit();
         setTitle(getString(R.string.editContact));
     }
 }

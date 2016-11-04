@@ -1,10 +1,8 @@
 package com.android.phoneagenda;
 
 import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.api.model.StringList;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -68,6 +66,15 @@ public class DatabaseHelper {
 
         DatabaseReference newRef = mDatabase.child(user.getUid()).child(CONTACT_DB_KEY).child(contact.getId());
         newRef.setValue(contact);
+    }
+
+    public static void deleteContact(Contact contact){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference newRef = mDatabase.child(user.getUid()).child(CONTACT_DB_KEY).child(contact.getId());
+        newRef.removeValue();
+
     }
 
     public interface DatabaseListener {

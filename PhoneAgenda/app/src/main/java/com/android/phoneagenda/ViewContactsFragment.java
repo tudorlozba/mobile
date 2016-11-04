@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import static com.android.phoneagenda.MainActivity.ADD_CONTACT_FRAGMENT_TAG;
 
 /**
  * Created by tudorlozba on 03/11/2016.
@@ -16,7 +21,6 @@ import java.util.ArrayList;
 public class ViewContactsFragment extends Fragment implements DatabaseHelper.DatabaseListener{
 
     private ArrayList<Contact> contacts = new ArrayList<>();
-    private ArrayList<String> keys = new ArrayList<>();
     private ListView list;
     private ContactsListAdapter adapter;
 
@@ -27,6 +31,7 @@ public class ViewContactsFragment extends Fragment implements DatabaseHelper.Dat
         adapter = new ContactsListAdapter(getContext(), contacts, (ContactsListAdapter.ListItemClickListener) getActivity());
         list = (ListView) v.findViewById(R.id.contacts_list);
         list.setAdapter(adapter);
+        setHasOptionsMenu(true);
 
         return v;
     }
@@ -44,6 +49,25 @@ public class ViewContactsFragment extends Fragment implements DatabaseHelper.Dat
         this.contacts.addAll(contacts);
         adapter.notifyDataSetChanged();
         ((BaseActivity)getActivity()).hideProgressDialog();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_dummy_contacts){
+            createDummyContacts();
+            DatabaseHelper.fetchContacts(this);
+            return true;
+        } else if(item.getItemId() == R.id.menu_add_new_contact){
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AddContactFragment(), ADD_CONTACT_FRAGMENT_TAG).commit();
+            getActivity().setTitle(getString(R.string.addContact));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

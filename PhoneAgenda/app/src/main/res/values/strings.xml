@@ -10,4 +10,5 @@
     <string name="addContact">Add new contact</string>
     <string name="editContact">Edit contact</string>
     <string name="update_contact">Update contact</string>
+    <string name="delete_contact">Delete Contact</string>
 </resources>
