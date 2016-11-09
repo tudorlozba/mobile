@@ -8,15 +8,18 @@ public class Contact {
     private String name;
     private String number;
     private String email;
+    private String dateOfBirth;
+
 
     public Contact(){
 
     }
 
-    public Contact(String name, String number, String email) {
+    public Contact(String name, String number, String email, String dateOfBirth) {
         this.name = name;
         this.number = number;
         this.email = email;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getId() {
@@ -49,5 +52,13 @@ public class Contact {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
