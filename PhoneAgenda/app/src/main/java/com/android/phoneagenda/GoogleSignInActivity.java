@@ -50,7 +50,7 @@ public class GoogleSignInActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+      //  FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);

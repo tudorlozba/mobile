@@ -12,4 +12,8 @@
     <item
         android:id="@+id/menu_dummy_contacts"
         android:title="Add dummy conacts"/>
+
+    <item
+        android:id="@+id/sensors_page"
+        android:title="Sensors"/>
 </menu>

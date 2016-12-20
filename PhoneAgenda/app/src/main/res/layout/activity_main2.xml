@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:orientation="vertical"
     tools:context="com.android.phoneagenda.MainActivity">
 
+    <LinearLayout
+        android:id="@+id/internet_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff0000"
+        android:padding="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not connected to internet. Offline mode"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sync_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00bf33"
+        android:padding="8dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/sync_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
 <FrameLayout
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 
-</RelativeLayout>
+</LinearLayout>

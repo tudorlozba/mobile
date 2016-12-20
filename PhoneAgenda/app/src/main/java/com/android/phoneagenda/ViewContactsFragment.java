@@ -1,5 +1,6 @@
 package com.android.phoneagenda;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -39,8 +42,10 @@ public class ViewContactsFragment extends Fragment implements DatabaseHelper.Dat
     @Override
     public void onResume() {
         super.onResume();
-        ((BaseActivity)getActivity()).showProgressDialog();
-        DatabaseHelper.fetchContacts(this);
+        if(((MainActivity)getActivity()).isNetworkConnected()) {
+            ((BaseActivity) getActivity()).showProgressDialog();
+            DatabaseHelper.fetchContacts(this);
+        }
     }
 
     @Override
@@ -49,6 +54,7 @@ public class ViewContactsFragment extends Fragment implements DatabaseHelper.Dat
         this.contacts.addAll(contacts);
         adapter.notifyDataSetChanged();
         ((BaseActivity)getActivity()).hideProgressDialog();
+        //DatabaseHelper.removeCallback();
     }
 
     @Override
@@ -66,6 +72,10 @@ public class ViewContactsFragment extends Fragment implements DatabaseHelper.Dat
         } else if(item.getItemId() == R.id.menu_add_new_contact){
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AddContactFragment(), ADD_CONTACT_FRAGMENT_TAG).commit();
             getActivity().setTitle(getString(R.string.addContact));
+        } else if(item.getItemId() == R.id.sensors_page){
+            Intent intent = new Intent();
+            intent.setClass(getContext(), SensorsActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

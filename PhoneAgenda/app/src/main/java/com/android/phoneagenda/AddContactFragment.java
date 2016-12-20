@@ -136,7 +136,15 @@ public class AddContactFragment extends Fragment implements View.OnClickListener
 
     private void createAndSaveContact() {
         Contact contact = new Contact(mContactName.getText().toString(), mContactNumber.getText().toString(), mContactEmail.getText().toString(), mDateOfBirth.getText().toString());
-        DatabaseHelper.addContact(contact);
+
+        if(((MainActivity)getActivity()).isNetworkConnected()) {
+            //store in online DB directly
+            DatabaseHelper.addContact(contact);
+        } else {
+            //cache the contact in the local DB.
+            DatabaseHelper.cacheContact(contact, getContext());
+            ((MainActivity)getActivity()).showNotification();
+        }
         getActivity().onBackPressed();
     }
 }
